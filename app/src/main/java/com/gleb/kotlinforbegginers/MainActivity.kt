@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         textForDataClass.gravity = Gravity.CENTER
         textForDataClass.text = printString
 
-
         val textForDataClass2 = findViewById<TextView>(R.id.textForDataClass2)
         val printString2 =
             DataCopy.dataClassCopy.string + "\n" + DataCopy.dataClassCopy.value.toString()

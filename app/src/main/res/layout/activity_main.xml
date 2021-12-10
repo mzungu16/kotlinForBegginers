@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/clickBtn"
     android:layout_width="match_parent"
