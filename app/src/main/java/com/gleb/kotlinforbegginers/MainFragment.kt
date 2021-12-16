@@ -1,15 +1,18 @@
 package com.gleb.kotlinforbegginers
 
+import android.graphics.Typeface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gleb.kotlinforbegginers.databinding.MainFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
 
@@ -34,26 +37,39 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.getData().observe(viewLifecycleOwner, { state ->
+            render(state)
+        })
+        viewModel.getCard()
+    }
 
-        val listOfImages: List<Int> =
-            listOf(R.drawable.harry, R.drawable.lord, R.drawable.pirates)
-
-        val listOfTitles: List<String> =
-            listOf("Harry Potter", "Lord Of the Rings", "Pirates")
-        listOfCards = mutableListOf()
-        for (i in 0 until 3) {
-            listOfCards.add(Card(listOfTitles[i], listOfImages[i]))
+    fun render(state: State) {
+        when (state) {
+            is State.Success -> {
+                binding.loadingContainer.visibility = View.GONE
+                val card = state.card as Card
+                binding.beckImageId.setImageResource(card.image)
+                binding.beckImageId.scaleType = ImageView.ScaleType.CENTER_CROP
+                binding.frontImageId.setImageResource(card.image)
+                binding.frontImageId.scaleType = ImageView.ScaleType.CENTER_CROP
+                binding.titleOfFilmId.text = card.title
+                binding.titleOfFilmId.textSize = 30F
+                binding.titleOfFilmId.typeface = Typeface.DEFAULT_BOLD
+            }
+            is State.Error -> {
+                binding.loadingContainer.visibility = View.VISIBLE
+                Snackbar.make(
+                    binding.root,
+                    state.error.message.toString(),
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("Try again") {
+                    viewModel.getCard()
+                }.show()
+            }
+            is State.Loading -> {
+                binding.loadingContainer.visibility = View.VISIBLE
+            }
         }
-
-        val snapHelper = PagerSnapHelper()
-
-
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        snapHelper.attachToRecyclerView(binding.recyclerView)
-
-        binding.recyclerView.adapter = MyAdapter(listOfCards)
     }
 
     override fun onDestroy() {

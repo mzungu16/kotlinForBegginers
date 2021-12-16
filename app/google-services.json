@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "165195854199",
+    "project_id": "kotlinforbegginers",
+    "storage_bucket": "kotlinforbegginers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165195854199:android:bcba55524b5c2c3f0eb172",
+        "android_client_info": {
+          "package_name": "com.gleb.kotlinforbegginers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165195854199-a5m72lgjbo1kfs5thflcdnp39t3gv07c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1X2PyuyTu1SzosCTgcQBHXjGPK91NbYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165195854199-a5m72lgjbo1kfs5thflcdnp39t3gv07c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

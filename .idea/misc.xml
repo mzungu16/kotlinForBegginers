@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/for_check_button.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/for_textview.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/activity_main.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/main_fragment.xml" value="0.3875" />
