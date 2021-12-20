@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.*
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainFragment : Fragment() {
 
@@ -16,8 +14,10 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
-    private val adapter = MyAdapter()
+    private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+    private val myAdapter = MyAdapter()
+    private val snapHelper: SnapHelper = PagerSnapHelper()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,34 +27,26 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner, {
             render(it)
         })
         viewModel.getDataFromLocalSource()
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        val snapHelper: SnapHelper = PagerSnapHelper()
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView).apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = myAdapter
+        }
         snapHelper.attachToRecyclerView(recyclerView)
-        recyclerView.adapter = adapter
-        adapter.listener = object : MyAdapter.OnItemClick {
+        myAdapter.listener = object : MyAdapter.OnItemClick {
             override fun onClick(filmCard: FilmCard) {
-                val btnSheet = BottomSheet(filmCard)
-                btnSheet.show(requireActivity().supportFragmentManager, "BottomSheet")
-            }
-
-        }
-    }
-
-    private fun render(state: State) {
-        when (state) {
-            is State.Success -> {
-                val cards = state.filmCards
-                adapter.setFilmCards(cards)
+                BottomSheet(filmCard).also { btnDescription ->
+                    btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
+                }
             }
         }
     }
 
+    private fun render(state: State) = when (state) {
+        is State.Success -> myAdapter.setFilmCards(state.filmCards)
+    }
 }

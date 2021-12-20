@@ -32,20 +32,24 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun binding(card: FilmCard) {
-            val imageBack = itemView.findViewById<ImageView>(R.id.back_image_id)
-            imageBack.setImageResource(card.image)
-            imageBack.scaleType = ImageView.ScaleType.CENTER_CROP
-            val image = itemView.findViewById<ImageView>(R.id.front_image_id)
-            image.setImageResource(card.image)
-            image.scaleType = ImageView.ScaleType.CENTER_CROP
-            image.setOnClickListener(View.OnClickListener {
-                listener?.onClick(card)
-
-            })
-            val title = itemView.findViewById<TextView>(R.id.title_of_film_id)
-            title.text = card.title
-            title.textSize = 30F
-            title.typeface = Typeface.DEFAULT_BOLD
+            with(itemView) {
+                findViewById<ImageView>(R.id.back_image_id).apply {
+                    setImageResource(card.image)
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                }
+                findViewById<ImageView>(R.id.front_image_id).apply {
+                    setImageResource(card.image)
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    setOnClickListener(View.OnClickListener {
+                        listener?.onClick(card)
+                    })
+                }
+                findViewById<TextView>(R.id.title_of_film_id).apply {
+                    text = card.title
+                    textSize = 30F
+                    typeface = Typeface.DEFAULT_BOLD
+                }
+            }
         }
     }
 
