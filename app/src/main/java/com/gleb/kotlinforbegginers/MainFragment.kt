@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainFragment : Fragment() {
 
@@ -34,9 +36,16 @@ class MainFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val snapHelper: SnapHelper = PagerSnapHelper()
         recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.adapter = adapter
+        adapter.listener = object : MyAdapter.OnItemClick {
+            override fun onClick(filmCard: FilmCard) {
+                val btnSheet = BottomSheet(filmCard)
+                btnSheet.show(requireActivity().supportFragmentManager, "BottomSheet")
+            }
+
+        }
     }
 
     private fun render(state: State) {
