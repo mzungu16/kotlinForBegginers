@@ -9,6 +9,7 @@ class MainViewModel : ViewModel() {
     private val repo: Repository = RepositoryImpl()
 
     fun getData(): LiveData<State> = liveDataToObserve
+
     fun getDataFromLocalSource() {
         liveDataToObserve.value = (State.Success(repo.getFilmCardsFromLocalStorage()))
     }

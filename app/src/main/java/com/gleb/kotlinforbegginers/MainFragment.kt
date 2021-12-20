@@ -31,6 +31,7 @@ class MainFragment : Fragment() {
             render(it)
         })
         viewModel.getDataFromLocalSource()
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

@@ -1,5 +1,6 @@
 package com.gleb.kotlinforbegginers
 
+
 data class FilmCard(
     val image: Int,
     val imageOfMainActor: Int,

@@ -32,6 +32,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun binding(card: FilmCard) {
+
             with(itemView) {
                 findViewById<ImageView>(R.id.back_image_id).apply {
                     setImageResource(card.image)
