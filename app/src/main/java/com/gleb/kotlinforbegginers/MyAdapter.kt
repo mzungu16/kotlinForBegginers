@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
@@ -14,8 +15,11 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     var listener: OnItemClick? = null
 
     fun setFilmCards(filmCardsParam: List<FilmCard>) {
+        val diffCallBack = MyDiffCallBack(this.filmCards, filmCardsParam)
+        DiffUtil.calculateDiff(diffCallBack).also { diffResult ->
+            diffResult.dispatchUpdatesTo(this)
+        }
         filmCards = filmCardsParam
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

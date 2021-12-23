@@ -26,5 +26,5 @@ fun getFilmCards(str: String) = listOf(
         R.drawable.actor6,
         "Lord of the Rings",
         str.descriptions("Lord of the Rings")
-    )
+    ),
 )
