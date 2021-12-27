@@ -1,5 +1,5 @@
 package com.gleb.kotlinforbegginers
 
 interface Repository {
-    fun getFilmCardsFromLocalStorage():List<FilmCard>
+    fun getFilmCardsFromServer():List<FactDTO?>
 }

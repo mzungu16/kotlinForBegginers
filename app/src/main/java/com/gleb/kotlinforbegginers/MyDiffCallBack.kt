@@ -3,8 +3,8 @@ package com.gleb.kotlinforbegginers
 import androidx.recyclerview.widget.DiffUtil
 
 open class MyDiffCallBack(
-    private val oldList: List<FilmCard>,
-    private val newList: List<FilmCard>
+    private val oldList: List<FactDTO?>,
+    private val newList: List<FactDTO?>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return  oldList.size

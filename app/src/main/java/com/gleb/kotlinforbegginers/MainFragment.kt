@@ -2,6 +2,7 @@ package com.gleb.kotlinforbegginers
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,7 @@ class MainFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, {
             render(it)
         })
-        viewModel.getDataFromLocalSource()
+        viewModel.getDataFromServer()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
@@ -39,7 +40,7 @@ class MainFragment : Fragment() {
         }
         snapHelper.attachToRecyclerView(recyclerView)
         myAdapter.listener = object : MyAdapter.OnItemClick {
-            override fun onClick(filmCard: FilmCard) {
+            override fun onClick(filmCard: FactDTO?) {
                 BottomSheet(filmCard).also { btnDescription ->
                     btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
                 }
@@ -48,6 +49,9 @@ class MainFragment : Fragment() {
     }
 
     private fun render(state: State) = when (state) {
-        is State.Success -> myAdapter.setFilmCards(state.filmCards)
+        is State.Success -> {
+            myAdapter.setFilmCards(state.filmCards)
+            Log.d(FilmLoader.TAG, "State.filmCards ${state.filmCards}")
+        }
     }
 }

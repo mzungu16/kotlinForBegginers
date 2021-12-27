@@ -10,7 +10,7 @@ class MainViewModel : ViewModel() {
 
     fun getData(): LiveData<State> = liveDataToObserve
 
-    fun getDataFromLocalSource() {
-        liveDataToObserve.value = (State.Success(repo.getFilmCardsFromLocalStorage()))
+    fun getDataFromServer() {
+        liveDataToObserve.value = (State.Success(repo.getFilmCardsFromServer()))
     }
 }
