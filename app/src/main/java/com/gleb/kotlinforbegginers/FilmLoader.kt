@@ -15,9 +15,9 @@ object FilmLoader {
     const val TAG = "myTag"
     private const val KEY = "43f0fb07d8e8120f4d5ef58a4ba90cb7"
 
-    fun load(): List<FactDTO?> {
+    fun load(onCompleteListener: Listener<List<FactDTO?>>) {
         val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
-        var loadedList: List<FactDTO?> = listOf()
+
         Thread {
             var urlConnection: HttpsURLConnection? = null
 
@@ -38,8 +38,7 @@ object FilmLoader {
                 val filmCardDTO = Gson().fromJson(result, FilmCardDTO::class.java)
                 Log.d(TAG, "FilmCardDTO = $filmCardDTO")
                 handler.post {
-                    loadedList = filmCardDTO.results
-                    Log.d(TAG, "Success $loadedList")
+                    onCompleteListener.on(filmCardDTO.results)
                 }
             } catch (e: Exception) {
                 Log.d(TAG, e.message.toString())
@@ -48,7 +47,9 @@ object FilmLoader {
 
             }
         }.start()
-        Log.d(TAG,"$loadedList")
-        return loadedList
+    }
+
+    interface Listener<T> {
+        fun on(arg: T)
     }
 }

@@ -3,6 +3,7 @@ package com.gleb.kotlinforbegginers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.*
 
 class MainViewModel : ViewModel() {
     private val liveDataToObserve: MutableLiveData<State> = MutableLiveData()
@@ -11,6 +12,10 @@ class MainViewModel : ViewModel() {
     fun getData(): LiveData<State> = liveDataToObserve
 
     fun getDataFromServer() {
-        liveDataToObserve.value = (State.Success(repo.getFilmCardsFromServer()))
+        FilmLoader.load(object : FilmLoader.Listener<List<FactDTO?>> {
+            override fun on(arg: List<FactDTO?>) {
+                liveDataToObserve.value = State.Success(arg)
+            }
+        })
     }
 }
