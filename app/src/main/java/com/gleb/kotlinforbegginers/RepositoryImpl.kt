@@ -1,14 +1,15 @@
 package com.gleb.kotlinforbegginers
 
 import android.util.Log
+import io.reactivex.rxjava3.core.Observable
 
 
 class RepositoryImpl : Repository{
-    override fun getFilmCardsFromServer() {
-        FilmLoader.load(object : FilmLoader.Listener<List<FactDTO?>> {
+
+     /*   FilmLoader.load(object : FilmLoader.Listener<List<FactDTO?>> {
             override fun on(arg: List<FactDTO?>) {
             }
         })
-    }
+    }*/
 
 }

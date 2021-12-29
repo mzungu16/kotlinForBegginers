@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_view_bottomSheet_textSize">20sp</dimen>
-    <dimen name="text_view_recyclerView_item_textSize">30sp</dimen>
+    <dimen name="text_view_recyclerView_item_textSize">20sp</dimen>
     <dimen name="corner_radius_recyclerView_item">15dp</dimen>
 </resources>

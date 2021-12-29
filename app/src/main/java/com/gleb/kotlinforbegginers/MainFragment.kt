@@ -53,5 +53,6 @@ class MainFragment : Fragment() {
             myAdapter.setFilmCards(state.filmCards)
             Log.d(FilmLoader.TAG, "State.filmCards ${state.filmCards}")
         }
+        else -> {}
     }
 }

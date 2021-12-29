@@ -44,7 +44,37 @@ object FilmLoader {
                 Log.d(TAG, e.message.toString())
             } finally {
                 urlConnection?.disconnect()
+            }
+        }.start()
+    }
 
+    fun loadCredits(filmId: Int?, onCompleteListener: Listener<List<CastDTO?>>) {
+//        Thread.currentThread().join(2000)
+        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
+        Thread {
+            var urlConnection2: HttpsURLConnection? = null
+            try {
+                val uri2 =
+                    URL("https://api.themoviedb.org/3/movie/$filmId/credits?api_key=$KEY&language=en-US")
+                urlConnection2 = uri2.openConnection() as HttpsURLConnection
+                urlConnection2.apply {
+                    addRequestProperty("KEY2", KEY)
+                    requestMethod = "GET"
+                    readTimeout = 1000
+                    connectTimeout = 1000
+                }
+                val reader = BufferedReader(InputStreamReader(urlConnection2.inputStream))
+                val result = reader.lines().collect(Collectors.joining("\n"))
+                Log.d(TAG, "Result2 = $result")
+                val creditsDTO = Gson().fromJson(result, CreditsDTO::class.java)
+                Log.d(TAG, "CreditsDTO = $creditsDTO")
+                handler.post {
+                    onCompleteListener.on(creditsDTO.cast)
+                }
+            } catch (e: Exception) {
+                Log.d(TAG, e.message.toString())
+            } finally {
+                urlConnection2?.disconnect()
             }
         }.start()
     }
