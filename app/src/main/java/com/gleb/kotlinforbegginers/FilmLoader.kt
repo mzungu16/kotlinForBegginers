@@ -49,7 +49,6 @@ object FilmLoader {
     }
 
     fun loadCredits(filmId: Int?, onCompleteListener: Listener<List<CastDTO?>>) {
-//        Thread.currentThread().join(2000)
         val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
         Thread {
             var urlConnection2: HttpsURLConnection? = null
