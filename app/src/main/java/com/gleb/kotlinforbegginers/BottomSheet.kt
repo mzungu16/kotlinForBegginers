@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 
@@ -33,22 +34,13 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
             creditsCast = render(it)
             with(view) {
                 findViewById<ImageView>(R.id.first_image).apply {
-                    Picasso.with(context)
-                        .load("https://image.tmdb.org/t/p/original/${creditsCast[0]?.profile_path}")
-                        .into(this)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    load("https://image.tmdb.org/t/p/original/${creditsCast[0]?.profile_path}")
                 }
                 findViewById<ImageView>(R.id.second_image).apply {
-                    Picasso.with(context)
-                        .load("https://image.tmdb.org/t/p/original/${creditsCast[1]?.profile_path}")
-                        .into(this)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    load("https://image.tmdb.org/t/p/original/${creditsCast[1]?.profile_path}")
                 }
                 findViewById<ImageView>(R.id.third_image).apply {
-                    Picasso.with(context)
-                        .load("https://image.tmdb.org/t/p/original/${creditsCast[2]?.profile_path}")
-                        .into(this)
-                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    load("https://image.tmdb.org/t/p/original/${creditsCast[2]?.profile_path}")
                 }
                 findViewById<TextView>(R.id.text_of_description).apply {
                     text = filmCard?.overview
