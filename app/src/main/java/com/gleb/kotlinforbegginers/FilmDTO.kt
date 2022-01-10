@@ -1,10 +1,10 @@
 package com.gleb.kotlinforbegginers
 
-data class FilmCardDTO(
-    val results: List<FactDTO?>
+data class FilmDTO(
+    val results: List<FilmCardDTO?>
 )
 
-data class FactDTO(
+data class FilmCardDTO(
     val id: Int?,
     val original_title: String?,
     val overview: String?,

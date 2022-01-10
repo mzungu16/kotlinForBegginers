@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
         }
         snapHelper.attachToRecyclerView(recyclerView)
         myAdapter.listener = object : MyAdapter.OnItemClick {
-            override fun onClick(filmCard: FactDTO?) {
+            override fun onClick(filmCard: FilmCardDTO?) {
                 BottomSheet(filmCard).also { btnDescription ->
                     btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
                 }

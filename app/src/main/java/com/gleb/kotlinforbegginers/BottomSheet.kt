@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 
-class BottomSheet(val filmCard: FactDTO?) : BottomSheetDialogFragment() {
+class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
     private val viewModel: BottomSheetViewModel by lazy {
         ViewModelProvider(this).get(
             BottomSheetViewModel::class.java

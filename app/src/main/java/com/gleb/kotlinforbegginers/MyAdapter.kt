@@ -1,7 +1,6 @@
 package com.gleb.kotlinforbegginers
 
 import android.graphics.Typeface
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-    private var filmCards: List<FactDTO?> = listOf()
+    private var filmCards: List<FilmCardDTO?> = listOf()
 
     var listener: OnItemClick? = null
 
-    fun setFilmCards(filmCardsParam: List<FactDTO?>) {
+    fun setFilmCards(filmCardsParam: List<FilmCardDTO?>) {
         val diffCallBack = MyDiffCallBack(this.filmCards, filmCardsParam)
         DiffUtil.calculateDiff(diffCallBack).also { diffResult ->
             diffResult.dispatchUpdatesTo(this)
@@ -37,7 +36,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     override fun getItemCount(): Int = filmCards.size
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun binding(card: FactDTO?) {
+        fun binding(card: FilmCardDTO?) {
 
             with(itemView) {
                 findViewById<ImageView>(R.id.back_image_id).apply {
@@ -61,6 +60,6 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     }
 
     interface OnItemClick {
-        fun onClick(filmCard: FactDTO?)
+        fun onClick(filmCard: FilmCardDTO?)
     }
 }
