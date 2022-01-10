@@ -1,5 +1,6 @@
 package com.gleb.kotlinforbegginers
 
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

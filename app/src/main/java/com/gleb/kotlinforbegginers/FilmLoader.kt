@@ -4,6 +4,7 @@ import android.os.*
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.functions.Consumer
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -42,39 +43,6 @@ object FilmLoader {
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
         .create(RetrofitInt::class.java)
-
-    fun load(onCompleteListener: Listener<List<FilmCardDTO?>>) {
-        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
-
-        Thread {
-            var urlConnection: HttpsURLConnection? = null
-
-            try {
-                val uri =
-                    URL("https://api.themoviedb.org/3/movie/popular?api_key=$KEY&language=en-US&page=1&region=US")
-
-                urlConnection = uri.openConnection() as HttpsURLConnection
-                urlConnection.apply {
-                    addRequestProperty("KEY", KEY)
-                    requestMethod = "GET"
-                    readTimeout = 1000
-                    connectTimeout = 1000
-                }
-                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
-                val result = reader.lines().collect(Collectors.joining("\n"))
-                Log.d(TAG, "Result = $result")
-                val filmCardDTO = Gson().fromJson(result, FilmDTO::class.java)
-                Log.d(TAG, "FilmCardDTO = $filmCardDTO")
-                handler.post {
-                    onCompleteListener.on(filmCardDTO.results)
-                }
-            } catch (e: Exception) {
-                Log.d(TAG, e.message.toString())
-            } finally {
-                urlConnection?.disconnect()
-            }
-        }.start()
-    }
 
     fun loadCredits(filmId: Int?, onCompleteListener: Listener<List<CastDTO?>>) {
 //        Thread.currentThread().join(2000)
@@ -116,7 +84,7 @@ object FilmLoader {
 
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
-                Log.d(TAG,e.message.toString())
+                Log.d(TAG, e.message.toString())
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
@@ -134,42 +102,19 @@ object FilmLoader {
     fun loadRetrofit(onCompleteListener: Listener<List<FilmCardDTO?>>) {
         retrofitObject.getFilms(KEY, KEY).enqueue(object : Callback<FilmDTO> {
             override fun onResponse(call: Call<FilmDTO>, response: Response<FilmDTO>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { filmDTO ->
-                        onCompleteListener.on(filmDTO.results)
-                    }
-                } else {
-                    Log.d(FilmLoader.TAG, "FAIL")
+                response.body()?.let{
+                    onCompleteListener.on(it.results)
                 }
             }
 
             override fun onFailure(call: Call<FilmDTO>, t: Throwable) {
-                Log.d(FilmLoader.TAG, t.message.toString())
+                Log.d(TAG, t.stackTraceToString())
             }
 
         })
-        Thread.sleep(2000)
     }
 
     interface Listener<T> {
         fun on(arg: T)
     }
 }
-
-/*
-.enqueue(object : Callback<FilmDTO> {
-    override fun onResponse(call: Call<FilmDTO>, response: Response<FilmDTO>) {
-        if (response.isSuccessful) {
-            response.body()?.let { filmDTO ->
-                onCompleteListener.on(filmDTO.results)
-            }
-        } else {
-            Log.d(FilmLoader.TAG, "FAIL")
-        }
-    }
-
-    override fun onFailure(call: Call<FilmDTO>, t: Throwable) {
-        Log.d(FilmLoader.TAG, t.message.toString())
-    }
-
-})*/
