@@ -9,8 +9,8 @@ class BottomSheetViewModel : ViewModel() {
     private val repo: Repository = RepositoryImpl()
     fun getData(): LiveData<State> = liveDataToObserve
     fun getDataFromServer2(profile:Int?){
-        FilmLoader.loadCredits(profile,object : FilmLoader.Listener<List<CastDTO?>>{
-            override fun on(arg: List<CastDTO?>) {
+        InternetLoader.loadCreditsWithRetrofit(profile,object : InternetLoader.Listener<List<CreditsCardDTO?>>{
+            override fun on(arg: List<CreditsCardDTO?>) {
                 liveDataToObserve.value = State.SuccessToCredits(arg)
             }
         })

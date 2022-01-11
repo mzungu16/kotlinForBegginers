@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.squareup.picasso.Picasso
 
 class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
     private val viewModel: BottomSheetViewModel by lazy {
@@ -18,7 +18,7 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
             BottomSheetViewModel::class.java
         )
     }
-    private var creditsCast: List<CastDTO?> = listOf()
+    private var creditsCast: List<CreditsCardDTO?> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,23 +35,26 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
             with(view) {
                 findViewById<ImageView>(R.id.first_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[0]?.profile_path}")
+                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[0]?.name,Toast.LENGTH_SHORT).show() }
                 }
                 findViewById<ImageView>(R.id.second_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[1]?.profile_path}")
+                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[1]?.name,Toast.LENGTH_SHORT).show()}
                 }
                 findViewById<ImageView>(R.id.third_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[2]?.profile_path}")
+                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[2]?.name,Toast.LENGTH_SHORT).show()}
                 }
                 findViewById<TextView>(R.id.text_of_description).apply {
                     text = filmCard?.overview
                 }
             }
-            Log.d(FilmLoader.TAG, "$creditsCast")
+            Log.d(InternetLoader.TAG, "$creditsCast")
         })
         viewModel.getDataFromServer2(filmCard?.id)
     }
 
-    private fun render(state: State): List<CastDTO?> {
+    private fun render(state: State): List<CreditsCardDTO?> {
         when (state) {
             is State.SuccessToCredits -> {
                 return state.creditCard

@@ -1,10 +1,10 @@
 package com.gleb.kotlinforbegginers
 
 class CreditsDTO(
-    val cast: List<CastDTO?>
+    val cast: List<CreditsCardDTO?>
 )
 
-data class CastDTO(
+data class CreditsCardDTO(
     val name: String?,
     val profile_path: String?
 )

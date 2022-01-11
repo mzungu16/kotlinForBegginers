@@ -2,22 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<ImageView
-    android:id="@+id/back_image_id"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/white"
-        app:cardCornerRadius="@dimen/corner_radius_recyclerView_item">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,31 +19,26 @@
                 <ImageView
                     android:id="@+id/front_image_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="400dp"
+                    android:layout_height="250dp"
                     tools:scaleType="centerCrop"
                     tools:src="@tools:sample/backgrounds/scenic" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/voteAverage"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:background="@drawable/for_average_button2"/>
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/title_of_film_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                tools:text="Title"
-                tools:textSize="@dimen/text_view_recyclerView_item_textSize"
-                tools:textStyle="bold" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/check_film_button_id"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:textAlignment="center"
+                android:textSize="15sp"
                 android:background="@drawable/for_check_button"
                 android:text="@string/review" />
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 </FrameLayout>

@@ -16,8 +16,9 @@ class MainFragment : Fragment() {
     }
 
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-    private val myAdapter = MyAdapter()
-    private val snapHelper: SnapHelper = PagerSnapHelper()
+//    private val genreViewModel: GenreViewModel by lazy { ViewModelProvider(this).get(GenreViewModel::class.java) }
+    private val myAdapter1 = MyAdapter()
+    private val myAdapter2 = GenresAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,28 +32,39 @@ class MainFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, {
             render(it)
         })
-        viewModel.getDataFromServer()
+        viewModel.getFilmDataFromServer()
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView).apply {
+     /*   genreViewModel.getData2().observe(viewLifecycleOwner,{
+            render(it)
+        })
+        genreViewModel.getGenreDataFromServer()*/
+
+        view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = myAdapter
+            adapter = myAdapter1
         }
-        snapHelper.attachToRecyclerView(recyclerView)
-        myAdapter.listener = object : MyAdapter.OnItemClick {
+        myAdapter1.listener = object : MyAdapter.OnItemClick {
             override fun onClick(filmCard: FilmCardDTO?) {
                 BottomSheet(filmCard).also { btnDescription ->
                     btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
                 }
             }
         }
+        /*view.findViewById<RecyclerView>(R.id.recyclerViewGenre).apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = myAdapter2
+        }*/
     }
 
     private fun render(state: State) = when (state) {
         is State.Success -> {
-            myAdapter.setFilmCards(state.filmCards)
-            Log.d(FilmLoader.TAG, "State.filmCards ${state.filmCards}")
+            myAdapter1.setFilmCards(state.filmCards)
         }
+        /*is State.SuccessToGenres -> {
+            myAdapter2.setGenreCards(state.genreCard)
+        }*/
         else -> {}
     }
 }

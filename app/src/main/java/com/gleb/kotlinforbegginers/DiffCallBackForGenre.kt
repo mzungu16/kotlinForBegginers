@@ -2,12 +2,12 @@ package com.gleb.kotlinforbegginers
 
 import androidx.recyclerview.widget.DiffUtil
 
-open class MyDiffCallBack(
-    private val oldList: List<FilmCardDTO?>,
-    private val newList: List<FilmCardDTO?>
+open class DiffCallBackForGenre(
+    private val oldList: List<GenreCardDTO?>,
+    private val newList: List<GenreCardDTO?>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
-        return  oldList.size
+        return oldList.size
     }
 
     override fun getNewListSize(): Int {
