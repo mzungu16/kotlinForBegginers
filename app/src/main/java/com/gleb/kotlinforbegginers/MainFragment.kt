@@ -16,7 +16,8 @@ class MainFragment : Fragment() {
     }
 
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-//    private val genreViewModel: GenreViewModel by lazy { ViewModelProvider(this).get(GenreViewModel::class.java) }
+
+    //    private val genreViewModel: GenreViewModel by lazy { ViewModelProvider(this).get(GenreViewModel::class.java) }
     private val myAdapter1 = MyAdapter()
     private val myAdapter2 = GenresAdapter()
 
@@ -30,14 +31,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData().observe(viewLifecycleOwner, {
-            render(it)
+            myAdapter1.setFilmCards(it)
         })
         viewModel.getFilmDataFromServer()
 
-     /*   genreViewModel.getData2().observe(viewLifecycleOwner,{
-            render(it)
-        })
-        genreViewModel.getGenreDataFromServer()*/
+        /*   genreViewModel.getData2().observe(viewLifecycleOwner,{
+               render(it)
+           })
+           genreViewModel.getGenreDataFromServer()*/
 
         view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
@@ -58,13 +59,6 @@ class MainFragment : Fragment() {
         }*/
     }
 
-    private fun render(state: State) = when (state) {
-        is State.Success -> {
-            myAdapter1.setFilmCards(state.filmCards)
-        }
-        /*is State.SuccessToGenres -> {
-            myAdapter2.setGenreCards(state.genreCard)
-        }*/
-        else -> {}
-    }
+
+
 }
