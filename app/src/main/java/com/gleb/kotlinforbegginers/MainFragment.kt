@@ -2,7 +2,6 @@ package com.gleb.kotlinforbegginers
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +14,11 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+    private val filmViewModel: FilmViewModel by lazy { ViewModelProvider(this).get(FilmViewModel::class.java) }
 
     //    private val genreViewModel: GenreViewModel by lazy { ViewModelProvider(this).get(GenreViewModel::class.java) }
-    private val myAdapter1 = MyAdapter()
-    private val myAdapter2 = GenresAdapter()
+    private val filmAdapter = FilmAdapter()
+    private val genresAdapter = GenresAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +29,12 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData().observe(viewLifecycleOwner, {
-            myAdapter1.setFilmCards(it)
+        val simpleFilmList = listOf<FilmCardDTO?>()
+        filmViewModel.getLiveData().observe(viewLifecycleOwner, {
+            filmAdapter.setFilmCards(it)
         })
-        viewModel.getFilmDataFromServer()
+        filmViewModel.setLiveDataValueMethod(simpleFilmList)
+        filmViewModel.getFilmData()
 
         /*   genreViewModel.getData2().observe(viewLifecycleOwner,{
                render(it)
@@ -43,9 +44,9 @@ class MainFragment : Fragment() {
         view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = myAdapter1
+            adapter = filmAdapter
         }
-        myAdapter1.listener = object : MyAdapter.OnItemClick {
+        filmAdapter.listener = object : FilmAdapter.OnItemClick {
             override fun onClick(filmCard: FilmCardDTO?) {
                 BottomSheet(filmCard).also { btnDescription ->
                     btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
@@ -58,7 +59,6 @@ class MainFragment : Fragment() {
             adapter = myAdapter2
         }*/
     }
-
 
 
 }

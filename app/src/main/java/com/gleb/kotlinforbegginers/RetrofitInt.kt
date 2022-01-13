@@ -17,13 +17,13 @@ interface RetrofitInt {
     @GET("3/movie/{movie_id}/credits")
     fun getCredits(
         @Header("KEY") token: String,
-        @Path("movie_id") id:Int?,
+        @Path("movie_id") id: Int?,
         @Query("api_key") key: String
-    ):Call<CreditsDTO>
+    ): Call<CreditsDTO>
 
     @GET("3/genre/movie/list")
     fun getGenres(
         @Header("KEY") token: String,
         @Query("api_key") key: String
-    ):Call<GenresDTO>
+    ): Call<GenresDTO>
 }

@@ -68,7 +68,7 @@ object InternetLoader {
             }
 
             override fun onFailure(call: Call<GenresDTO?>, t: Throwable) {
-                Log.d(TAG,t.message.toString())
+                Log.d(TAG, t.message.toString())
             }
         })
     }

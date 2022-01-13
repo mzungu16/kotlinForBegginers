@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 
-class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
     private var filmCards: List<FilmCardDTO?> = listOf()
 
     var listener: OnItemClick? = null

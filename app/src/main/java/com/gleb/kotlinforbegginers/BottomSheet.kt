@@ -13,12 +13,9 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
-    private val viewModel: BottomSheetViewModel by lazy {
-        ViewModelProvider(this).get(
-            BottomSheetViewModel::class.java
-        )
+    private val creditsViewModel: CreditsBottomSheetViewModel by lazy {
+        ViewModelProvider(this).get(CreditsBottomSheetViewModel::class.java)
     }
-    private var creditsCast: List<CreditsCardDTO?> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,37 +27,46 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData().observe(viewLifecycleOwner, {
-            creditsCast = render(it)
+        val emptyCreditList = listOf<CreditsCardDTO?>()
+        creditsViewModel.getLiveData().observe(viewLifecycleOwner, {
             with(view) {
+                val creditsCast = it
                 findViewById<ImageView>(R.id.first_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[0]?.profile_path}")
-                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[0]?.name,Toast.LENGTH_SHORT).show() }
+                    setOnClickListener {
+                        Toast.makeText(
+                            requireContext(),
+                            creditsCast[0]?.name,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 findViewById<ImageView>(R.id.second_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[1]?.profile_path}")
-                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[1]?.name,Toast.LENGTH_SHORT).show()}
+                    setOnClickListener {
+                        Toast.makeText(
+                            requireContext(),
+                            creditsCast[1]?.name,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 findViewById<ImageView>(R.id.third_image).apply {
                     load("https://image.tmdb.org/t/p/original/${creditsCast[2]?.profile_path}")
-                    setOnClickListener { Toast.makeText(requireContext(),creditsCast[2]?.name,Toast.LENGTH_SHORT).show()}
+                    setOnClickListener {
+                        Toast.makeText(
+                            requireContext(),
+                            creditsCast[2]?.name,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 findViewById<TextView>(R.id.text_of_description).apply {
                     text = filmCard?.overview
                 }
             }
-            Log.d(InternetLoader.TAG, "$creditsCast")
         })
-        viewModel.getDataFromServer2(filmCard?.id)
-    }
-
-    private fun render(state: State): List<CreditsCardDTO?> {
-        when (state) {
-            is State.SuccessToCredits -> {
-                return state.creditCard
-            }
-            is State.Success -> {}
-        }
-        return emptyList()
+        creditsViewModel.setLiveDataValue(emptyCreditList)
+        creditsViewModel.getCreditData(filmCard?.id)
     }
 }
