@@ -9,7 +9,7 @@ class FilmViewModel : ViewModel() {
     private val liveDataToObserve: MutableLiveData<List<FilmCardDTO?>> = MutableLiveData()
     private val repo: Repository = RepositoryImpl()
 
-    fun getLiveData(): LiveData<List<FilmCardDTO?>> = Transformations.switchMap(liveDataToObserve) {
+    fun getFilmLiveData(): LiveData<List<FilmCardDTO?>> = Transformations.switchMap(liveDataToObserve) {
         repo.getFilmCardsFromServer()
     }
 

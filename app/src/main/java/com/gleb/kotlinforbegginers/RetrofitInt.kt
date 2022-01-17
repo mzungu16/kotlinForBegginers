@@ -20,10 +20,4 @@ interface RetrofitInt {
         @Path("movie_id") id: Int?,
         @Query("api_key") key: String
     ): Call<CreditsDTO>
-
-    @GET("3/genre/movie/list")
-    fun getGenres(
-        @Header("KEY") token: String,
-        @Query("api_key") key: String
-    ): Call<GenresDTO>
 }

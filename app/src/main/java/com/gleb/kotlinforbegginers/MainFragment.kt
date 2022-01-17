@@ -15,10 +15,7 @@ class MainFragment : Fragment() {
     }
 
     private val filmViewModel: FilmViewModel by lazy { ViewModelProvider(this).get(FilmViewModel::class.java) }
-
-    //    private val genreViewModel: GenreViewModel by lazy { ViewModelProvider(this).get(GenreViewModel::class.java) }
     private val filmAdapter = FilmAdapter()
-    private val genresAdapter = GenresAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,17 +26,12 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val simpleFilmList = listOf<FilmCardDTO?>()
-        filmViewModel.getLiveData().observe(viewLifecycleOwner, {
+        val emptyFilmList = listOf<FilmCardDTO?>()
+        filmViewModel.getFilmLiveData().observe(viewLifecycleOwner, {
             filmAdapter.setFilmCards(it)
         })
-        filmViewModel.setLiveDataValueMethod(simpleFilmList)
+        filmViewModel.setLiveDataValueMethod(emptyFilmList)
         filmViewModel.getFilmData()
-
-        /*   genreViewModel.getData2().observe(viewLifecycleOwner,{
-               render(it)
-           })
-           genreViewModel.getGenreDataFromServer()*/
 
         view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager =
@@ -53,12 +45,5 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        /*view.findViewById<RecyclerView>(R.id.recyclerViewGenre).apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = myAdapter2
-        }*/
     }
-
-
 }

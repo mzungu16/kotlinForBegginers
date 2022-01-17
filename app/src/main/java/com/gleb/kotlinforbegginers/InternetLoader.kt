@@ -61,18 +61,6 @@ object InternetLoader {
         })
     }
 
-    fun loadGenresWithRetrofit(onCompleteListener: Listener<List<GenreCardDTO?>>) {
-        retrofitObject.getGenres(KEY, KEY).enqueue(object : Callback<GenresDTO?> {
-            override fun onResponse(call: Call<GenresDTO?>, response: Response<GenresDTO?>) {
-                response.body()?.let { onCompleteListener.on(it.genre) }
-            }
-
-            override fun onFailure(call: Call<GenresDTO?>, t: Throwable) {
-                Log.d(TAG, t.message.toString())
-            }
-        })
-    }
-
     interface Listener<T> {
         fun on(arg: T)
     }
