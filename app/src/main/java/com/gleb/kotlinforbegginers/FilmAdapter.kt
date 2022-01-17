@@ -39,10 +39,6 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
         fun binding(card: FilmCardDTO?) {
 
             with(itemView) {
-                /* findViewById<ImageView>(R.id.back_image_id).apply {
-                     Picasso.with(context).load("https://image.tmdb.org/t/p/w500/${card?.poster_path}").into(this)
-                     scaleType = ImageView.ScaleType.CENTER_CROP
-                 }*/
                 findViewById<ImageView>(R.id.front_image_id).apply {
                     load("https://image.tmdb.org/t/p/original/${card?.poster_path}")
                     setOnClickListener(View.OnClickListener {
@@ -54,10 +50,6 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
                     setTextColor(Color.BLACK)
                     textSize = 15F
                 }
-                /*findViewById<TextView>(R.id.title_of_film_id).apply {
-                    text = card?.original_title
-                    textSize = 12F
-                }*/
             }
         }
     }
