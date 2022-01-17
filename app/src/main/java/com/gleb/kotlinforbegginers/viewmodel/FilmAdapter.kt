@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.gleb.kotlinforbegginers.viewmodel.DiffCallBackForFilm
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 

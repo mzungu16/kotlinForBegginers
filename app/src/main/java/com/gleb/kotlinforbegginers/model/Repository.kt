@@ -9,4 +9,7 @@ interface Repository {
 
     fun getCreditCardsFromServer(): LiveData<List<CreditsCardDTO?>>
     fun getCreditInternetAccess(profileId: Int?)
+
+    fun getAllFilmsFromDB(dao: FilmDao):List<FilmCardDTO?>
+    fun insertAllFilmsInDB(dao: FilmDao, list: List<FilmCardDTO?>)
 }
