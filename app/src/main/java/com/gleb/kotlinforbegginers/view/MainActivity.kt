@@ -1,13 +1,10 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.gleb.kotlinforbegginers.R
 
 
 class MainActivity : AppCompatActivity() {

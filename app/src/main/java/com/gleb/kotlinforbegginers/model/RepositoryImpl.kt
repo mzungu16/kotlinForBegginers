@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

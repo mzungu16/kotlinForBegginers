@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.model
 
 class CreditsDTO(
     val cast: List<CreditsCardDTO?>

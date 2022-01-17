@@ -1,6 +1,7 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.viewmodel
 
 import androidx.recyclerview.widget.DiffUtil
+import com.gleb.kotlinforbegginers.model.FilmCardDTO
 
 open class DiffCallBackForFilm(
     private val oldList: List<FilmCardDTO?>,

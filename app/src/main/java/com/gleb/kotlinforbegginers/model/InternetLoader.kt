@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.model
 
 import android.util.Log
 import com.google.gson.GsonBuilder

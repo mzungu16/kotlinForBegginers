@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
+import com.gleb.kotlinforbegginers.viewmodel.FilmAdapter
+import com.gleb.kotlinforbegginers.R
+import com.gleb.kotlinforbegginers.model.FilmCardDTO
+import com.gleb.kotlinforbegginers.viewmodel.FilmViewModel
 
 class MainFragment : Fragment() {
 

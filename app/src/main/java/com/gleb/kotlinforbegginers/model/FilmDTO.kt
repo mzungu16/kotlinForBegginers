@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.model
 
 data class FilmDTO(
     val results: List<FilmCardDTO?>

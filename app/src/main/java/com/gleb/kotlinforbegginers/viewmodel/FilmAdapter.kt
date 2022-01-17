@@ -1,4 +1,4 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.viewmodel
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.gleb.kotlinforbegginers.R
+import com.gleb.kotlinforbegginers.model.FilmCardDTO
 
 class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
     private var filmCards: List<FilmCardDTO?> = listOf()

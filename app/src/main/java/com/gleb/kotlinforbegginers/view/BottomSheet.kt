@@ -1,7 +1,6 @@
-package com.gleb.kotlinforbegginers
+package com.gleb.kotlinforbegginers.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
+import com.gleb.kotlinforbegginers.R
+import com.gleb.kotlinforbegginers.model.CreditsCardDTO
+import com.gleb.kotlinforbegginers.model.FilmCardDTO
+import com.gleb.kotlinforbegginers.viewmodel.CreditsBottomSheetViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
