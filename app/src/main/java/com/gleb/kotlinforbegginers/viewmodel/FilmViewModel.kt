@@ -19,6 +19,7 @@ class FilmViewModel : ViewModel() {
 
     fun setLiveDataValueMethod(arg: List<FilmCardDTO?>) {
         liveDataToObserve.value = arg
+        liveDataToObserve.value = repo.getAllFilmsFromDB(App.getMyDatabase())
     }
 
     fun getFilmData() {

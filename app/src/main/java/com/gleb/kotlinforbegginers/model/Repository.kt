@@ -11,5 +11,5 @@ interface Repository {
     fun getCreditInternetAccess(profileId: Int?)
 
     fun getAllFilmsFromDB(dao: FilmDao):List<FilmCardDTO?>
-    fun insertAllFilmsInDB(dao: FilmDao, list: List<FilmCardDTO?>)
+    fun insertAllFilmsInDB(dao: FilmDao, filmCards: List<FilmCardDTO?>)
 }

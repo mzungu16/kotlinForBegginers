@@ -9,13 +9,17 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appInstance = this
+        checkLaunch()
+    }
+
+    private fun checkLaunch(){
+
     }
 
     companion object {
         private var appInstance: App? = null
         private var db: MyDatabase? = null
         private var DB_NAME = "Room.db"
-
         fun getMyDatabase(): FilmDao {
             if (db == null) {
                 synchronized(MyDatabase::class.java) {
