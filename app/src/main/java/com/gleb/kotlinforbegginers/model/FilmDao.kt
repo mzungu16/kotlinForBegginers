@@ -1,14 +1,15 @@
 package com.gleb.kotlinforbegginers.model
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface FilmDao {
     @Query("SELECT * FROM filmTable")
     fun getAllFilms(): List<FilmEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllFilms(entity: FilmEntity)
+
+    @Update
+    fun updateAllFilms(entity: FilmEntity)
 }

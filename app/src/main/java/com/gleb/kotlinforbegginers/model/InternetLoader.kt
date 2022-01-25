@@ -61,6 +61,41 @@ object InternetLoader {
         })
     }
 
+    fun loadGenreWithRetrofit(onCompleteListener: Listener<List<GenreCardDTO?>>) {
+        retrofitObject.getGenres(KEY, KEY).enqueue(object : Callback<GenreDTO?> {
+            override fun onResponse(call: Call<GenreDTO?>, response: Response<GenreDTO?>) {
+                response.body()?.let {
+                    onCompleteListener.on(it.genres)
+                }
+            }
+
+            override fun onFailure(call: Call<GenreDTO?>, t: Throwable) {
+                Log.d(TAG, t.stackTraceToString())
+            }
+        })
+    }
+
+    fun loadFilmByGenreWithRetrofit(
+        genreId: Int?,
+        onCompleteListener: Listener<List<FilmByGenreCardDTO?>>
+    ) {
+        retrofitObject.getFilmByGenre(KEY, KEY, genreId.toString())
+            .enqueue(object : Callback<FilmByGenreDTO?> {
+                override fun onResponse(
+                    call: Call<FilmByGenreDTO?>,
+                    response: Response<FilmByGenreDTO?>
+                ) {
+                    response.body()?.let {
+                        onCompleteListener.on(it.results)
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmByGenreDTO?>, t: Throwable) {
+                    Log.d(TAG, t.stackTraceToString())
+                }
+            })
+    }
+
     interface Listener<T> {
         fun on(arg: T)
     }

@@ -8,7 +8,11 @@ import com.gleb.kotlinforbegginers.view.App
 class RepositoryImpl : Repository {
     private val liveDataToObserveFilms: MutableLiveData<List<FilmCardDTO?>> = MutableLiveData()
     private val liveDataToObserveCredits: MutableLiveData<List<CreditsCardDTO?>> = MutableLiveData()
+    private val liveDataToObserveGenres: MutableLiveData<List<GenreCardDTO?>> = MutableLiveData()
+    private val liveDataToObserveFilmByGenre: MutableLiveData<List<FilmByGenreCardDTO?>> =
+        MutableLiveData()
 
+    //film section
     override fun getFilmCardsFromServer(): LiveData<List<FilmCardDTO?>> {
         return liveDataToObserveFilms
     }
@@ -17,11 +21,15 @@ class RepositoryImpl : Repository {
         InternetLoader.loadFilmWithRetrofit(object : InternetLoader.Listener<List<FilmCardDTO?>> {
             override fun on(arg: List<FilmCardDTO?>) {
                 liveDataToObserveFilms.value = arg
-                insertAllFilmsInDB(App.getMyDatabase(),liveDataToObserveFilms.value as List<FilmCardDTO?>)
+                insertAllFilmsInDB(
+                    App.getMyDatabase(),
+                    liveDataToObserveFilms.value as List<FilmCardDTO?>
+                )
             }
         })
     }
 
+    //actors section
     override fun getCreditCardsFromServer(): LiveData<List<CreditsCardDTO?>> {
         return liveDataToObserveCredits
     }
@@ -35,6 +43,34 @@ class RepositoryImpl : Repository {
             })
     }
 
+    //genre section
+    override fun getGenreCardsFromServer(): LiveData<List<GenreCardDTO?>> {
+        return liveDataToObserveGenres
+    }
+
+    override fun getGenreInternetAccess() {
+        InternetLoader.loadGenreWithRetrofit(object : InternetLoader.Listener<List<GenreCardDTO?>> {
+            override fun on(arg: List<GenreCardDTO?>) {
+                liveDataToObserveGenres.value = arg
+            }
+        })
+    }
+
+    //filmByGenre section
+    override fun getFilmByGenreFromServer(): LiveData<List<FilmByGenreCardDTO?>> {
+        return liveDataToObserveFilmByGenre
+    }
+
+    override fun getFilmByGenreInternetAccess(genreId: Int?) {
+        InternetLoader.loadFilmByGenreWithRetrofit(genreId,
+            object : InternetLoader.Listener<List<FilmByGenreCardDTO?>> {
+                override fun on(arg: List<FilmByGenreCardDTO?>) {
+                    liveDataToObserveFilmByGenre.value = arg
+                }
+            })
+    }
+
+    //database section
     override fun getAllFilmsFromDB(dao: FilmDao): List<FilmCardDTO?> {
         return dao.getAllFilms()
             .map {
