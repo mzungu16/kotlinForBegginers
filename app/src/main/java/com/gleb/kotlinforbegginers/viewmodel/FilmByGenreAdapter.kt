@@ -45,11 +45,11 @@ class FilmByGenreAdapter : RecyclerView.Adapter<FilmByGenreAdapter.FilmByGenreVi
                         listener?.onClick(filmByGenre)
                     })
                 }
-                findViewById<Button>(R.id.voteAverage2).apply {
+               /* findViewById<Button>(R.id.voteAverage2).apply {
                     text = filmByGenre?.vote_average.toString()
                     setTextColor(Color.BLACK)
                     textSize = 15F
-                }
+                }*/
             }
         }
     }

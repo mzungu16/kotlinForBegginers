@@ -48,11 +48,6 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
                         listener?.onClick(card)
                     })
                 }
-                findViewById<Button>(R.id.voteAverage).apply {
-                    text = card?.vote_average.toString()
-                    setTextColor(Color.BLACK)
-                    textSize = 15F
-                }
             }
         }
     }

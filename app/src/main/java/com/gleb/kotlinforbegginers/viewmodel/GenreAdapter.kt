@@ -3,6 +3,7 @@ package com.gleb.kotlinforbegginers.viewmodel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +38,7 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
     inner class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun binding(genre:GenreCardDTO?){
             with(itemView){
-                findViewById<TextView>(R.id.genreText).apply{
+                findViewById<Button>(R.id.genreText).apply{
                     text = genre?.name
                     setOnClickListener(View.OnClickListener {
                         listener?.onClick(genre)
