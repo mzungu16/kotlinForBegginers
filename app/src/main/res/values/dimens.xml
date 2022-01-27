@@ -3,4 +3,5 @@
     <dimen name="text_view_bottomSheet_textSize">20sp</dimen>
     <dimen name="text_view_recyclerView_item_textSize">15sp</dimen>
     <dimen name="corner_radius_recyclerView_item">15dp</dimen>
+    <dimen name="shr_product_grid_reveal_height">200dp</dimen>
 </resources>

@@ -1,26 +1,22 @@
 package com.gleb.kotlinforbegginers.view
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.opengl.Visibility
+import kotlinx.android.synthetic.main.main_fragment.view.*
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
-import com.gleb.kotlinforbegginers.viewmodel.FilmAdapter
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.FilmByGenreCardDTO
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 import com.gleb.kotlinforbegginers.model.GenreCardDTO
-import com.gleb.kotlinforbegginers.viewmodel.FilmByGenreAdapter
-import com.gleb.kotlinforbegginers.viewmodel.FilmViewModel
-import com.gleb.kotlinforbegginers.viewmodel.GenreAdapter
+import com.gleb.kotlinforbegginers.viewmodel.*
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainFragment : Fragment() {
 
@@ -33,11 +29,29 @@ class MainFragment : Fragment() {
     private val genreAdapter = GenreAdapter()
     private val filmByGenreAdapter = FilmByGenreAdapter()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        val view = inflater.inflate(R.layout.main_fragment, container, false)
+        (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
+        view.app_bar.setNavigationOnClickListener(
+            NavigationIconClickListener(
+                activity!!,
+                view.product_grid,
+                AccelerateDecelerateInterpolator(),
+                ContextCompat.getDrawable(context!!,R.drawable.shr_menu),
+                ContextCompat.getDrawable(context!!, R.drawable.shr_close_menu)
+            )
+        )
+        view.product_grid.background =
+            context?.getDrawable(R.drawable.shr_product_grid_background_shape)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,8 +66,9 @@ class MainFragment : Fragment() {
         filmViewModel.getFilmData()
 
         view.findViewById<RecyclerView>(R.id.recyclerView).apply {
+            setHasFixedSize(true)
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
             adapter = filmAdapter
         }
         filmAdapter.listener = object : FilmAdapter.OnItemClick {
@@ -76,40 +91,34 @@ class MainFragment : Fragment() {
         }
         genreAdapter.listener = object : GenreAdapter.OnItemClick {
             override fun onClick(genreCard: GenreCardDTO?) {
-
+                view.findViewById<LinearLayout>(R.id.linear2).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.linear).visibility = View.VISIBLE
                 filmViewModel.getFilmByGenreLiveData().observe(viewLifecycleOwner, {
                     filmByGenreAdapter.setFilmByGenreCard(it)
                 })
                 filmViewModel.setFilmByGenreLiveDataValueMethod(emptyFilmByGenreList)
                 filmViewModel.getFilmByGenreData(genreCard?.id)
 
-                view.findViewById<LinearLayout>(R.id.linear).visibility = View.VISIBLE
-
                 view.findViewById<RecyclerView>(R.id.recyclerView_film_by_genre).apply {
+                    setHasFixedSize(true)
                     layoutManager =
-                        LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
                     adapter = filmByGenreAdapter
                 }
             }
         }
-        view.findViewById<TextView>(R.id.hideBtn).setOnClickListener(View.OnClickListener {
-            view.findViewById<LinearLayout>(R.id.linear).visibility = View.GONE
-        })
+        view.findViewById<SwitchMaterial>(R.id.hideBtn)
+            .setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    view.findViewById<LinearLayout>(R.id.linear).visibility = View.GONE
+                    view.findViewById<LinearLayout>(R.id.linear2).visibility = View.VISIBLE
+                    buttonView?.isChecked = false
+                }
+            }
     }
 
-    private fun checkConnection(): Boolean {
-        val connectivityManager: ConnectivityManager =
-            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities =
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities != null) {
-            return when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                else -> false
-            }
-        }
-        return false
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.shr_toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
