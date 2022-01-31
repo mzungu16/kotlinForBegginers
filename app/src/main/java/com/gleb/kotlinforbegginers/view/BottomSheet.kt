@@ -11,11 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.CreditsCardDTO
+import com.gleb.kotlinforbegginers.model.FilmByGenreCardDTO
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 import com.gleb.kotlinforbegginers.viewmodel.CreditsBottomSheetViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
+class BottomSheet(val filmCard: Any?) : BottomSheetDialogFragment() {
     private val creditsViewModel: CreditsBottomSheetViewModel by lazy {
         ViewModelProvider(this).get(CreditsBottomSheetViewModel::class.java)
     }
@@ -31,7 +32,7 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val emptyCreditList = listOf<CreditsCardDTO?>()
-        creditsViewModel.getLiveData().observe(viewLifecycleOwner, {
+        creditsViewModel.getLiveData().observe(viewLifecycleOwner) {
             with(view) {
                 val creditsCast = it
                 findViewById<ImageView>(R.id.first_image).apply {
@@ -65,11 +66,17 @@ class BottomSheet(val filmCard: FilmCardDTO?) : BottomSheetDialogFragment() {
                     }
                 }
                 findViewById<TextView>(R.id.text_of_description).apply {
-                    text = filmCard?.overview
+                    when (filmCard) {
+                        is FilmCardDTO? -> text = filmCard?.overview
+                        is FilmByGenreCardDTO? -> text = filmCard?.overview
+                    }
                 }
             }
-        })
+        }
         creditsViewModel.setLiveDataValue(emptyCreditList)
-        creditsViewModel.getCreditData(filmCard?.id)
+        when (filmCard) {
+            is FilmCardDTO? -> creditsViewModel.getCreditData(filmCard?.id)
+            is FilmByGenreCardDTO? ->  creditsViewModel.getCreditData(filmCard?.id)
+        }
     }
 }

@@ -17,8 +17,8 @@ object InternetLoader {
     private const val KEY = "43f0fb07d8e8120f4d5ef58a4ba90cb7"
 
     private val client: OkHttpClient = OkHttpClient.Builder()
-        .callTimeout(1000, TimeUnit.MILLISECONDS)
-        .connectTimeout(1000, TimeUnit.MILLISECONDS)
+        .callTimeout(2000, TimeUnit.MILLISECONDS)
+        .connectTimeout(2000, TimeUnit.MILLISECONDS)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
