@@ -4,15 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 import com.gleb.kotlinforbegginers.model.GenreCardDTO
+import com.google.android.material.chip.Chip
 
 class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
     private var genreCards = listOf<GenreCardDTO?>()
+
     var listener: OnItemClick? = null
     fun setGenreCards(genreCardParam: List<GenreCardDTO?>) {
         val diffCallBack = DiffCallBackForGenre(this.genreCards, genreCardParam)
@@ -35,10 +38,10 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     override fun getItemCount() = genreCards.size
 
-    inner class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun binding(genre:GenreCardDTO?){
-            with(itemView){
-                findViewById<Button>(R.id.genreText).apply{
+    inner class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun binding(genre: GenreCardDTO?) {
+            with(itemView) {
+                findViewById<Chip>(R.id.genreText).apply {
                     text = genre?.name
                     setOnClickListener(View.OnClickListener {
                         listener?.onClick(genre)
@@ -47,6 +50,7 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
             }
         }
     }
+
     interface OnItemClick {
         fun onClick(genreCard: GenreCardDTO?)
     }

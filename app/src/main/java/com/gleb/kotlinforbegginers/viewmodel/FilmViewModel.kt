@@ -9,7 +9,7 @@ class FilmViewModel : ViewModel() {
     private val liveDataToObserve: MutableLiveData<List<FilmCardDTO?>> = MutableLiveData()
     private val liveDataToObserve2: MutableLiveData<List<GenreCardDTO?>> = MutableLiveData()
     private val liveDataToObserve3: MutableLiveData<List<FilmByGenreCardDTO?>> = MutableLiveData()
-    val repo: Repository = RepositoryImpl()
+    private val repo: Repository = RepositoryImpl()
 
     //transfer viewLifecycleOwner to repository
     fun getFilmLiveData(): LiveData<List<FilmCardDTO?>> =
@@ -27,17 +27,16 @@ class FilmViewModel : ViewModel() {
             repo.getFilmByGenreFromServer()
         }
 
-    fun setFilmLiveDataValueMethod(arg: List<FilmCardDTO?>) {
-        liveDataToObserve.value = arg
-        liveDataToObserve.value = repo.getAllFilmsFromDB(App.getMyDatabase())
+    fun setFilmLiveDataValueMethod() {
+        liveDataToObserve.value = getFilmLiveData().value
     }
 
-    fun setGenreLiveDataValueMethod(arg: List<GenreCardDTO?>) {
-        liveDataToObserve2.value = arg
+    fun setGenreLiveDataValueMethod() {
+        liveDataToObserve2.value = getGenreLiveData().value
     }
 
-    fun setFilmByGenreLiveDataValueMethod(arg: List<FilmByGenreCardDTO?>) {
-        liveDataToObserve3.value = arg
+    fun setFilmByGenreLiveDataValueMethod() {
+        liveDataToObserve3.value = getFilmByGenreLiveData().value
     }
 
     //internet access

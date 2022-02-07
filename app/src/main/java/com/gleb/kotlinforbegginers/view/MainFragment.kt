@@ -56,31 +56,19 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val emptyFilmList = listOf<FilmCardDTO?>()
-        val emptyGenreList = listOf<GenreCardDTO?>()
-        val emptyFilmByGenreList = listOf<FilmByGenreCardDTO?>()
-        filmMethod(emptyFilmList, view)
-        genreMethod(emptyGenreList, view, emptyFilmByGenreList)
-        view.hideBtn
-            .setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    view.layout_with_filmByGenres.visibility = View.GONE
-                    view.layout_with_popularFilms.visibility = View.VISIBLE
-                    buttonView?.isChecked = false
-                }
-            }
-    }
+        filmMethod(view)
+        genreMethod(view)
 
-    private fun genreMethod(
-        emptyGenreList: List<GenreCardDTO?>,
-        view: View,
-        emptyFilmByGenreList: List<FilmByGenreCardDTO?>
-    ) {
+    }
+    /*view.layout_with_filmByGenres.visibility = View.GONE
+    view.layout_with_popularFilms.visibility = View.VISIBLE*/
+
+    private fun genreMethod(view: View) {
         with(filmViewModel) {
             getGenreLiveData().observe(viewLifecycleOwner) {
                 genreAdapter.setGenreCards(it)
             }
-            setGenreLiveDataValueMethod(emptyGenreList)
+            setGenreLiveDataValueMethod()
             getGenreData()
         }
         view.genre_recycler_view.apply {
@@ -88,14 +76,16 @@ class MainFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = genreAdapter
         }
+
         genreAdapter.listener = object : GenreAdapter.OnItemClick {
             override fun onClick(genreCard: GenreCardDTO?) {
                 view.layout_with_popularFilms.visibility = View.GONE
+
                 with(filmViewModel) {
                     getFilmByGenreLiveData().observe(viewLifecycleOwner) {
                         filmByGenreAdapter.setFilmByGenreCard(it)
                     }
-                    setFilmByGenreLiveDataValueMethod(emptyFilmByGenreList)
+                    setFilmByGenreLiveDataValueMethod()
                     getFilmByGenreData(genreCard?.id)
                 }
                 view.film_by_genre_recycler_view.apply {
@@ -118,15 +108,12 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun filmMethod(
-        emptyFilmList: List<FilmCardDTO?>,
-        view: View
-    ) {
+    private fun filmMethod(view: View) {
         with(filmViewModel) {
             getFilmLiveData().observe(viewLifecycleOwner) {
                 filmAdapter.setFilmCards(it)
             }
-            setFilmLiveDataValueMethod(emptyFilmList)
+            setFilmLiveDataValueMethod()
             getFilmData()
         }
         view.film_recycler_view.apply {
