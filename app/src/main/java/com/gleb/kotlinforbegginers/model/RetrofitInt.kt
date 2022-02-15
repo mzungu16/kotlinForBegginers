@@ -30,6 +30,13 @@ interface RetrofitInt {
     fun getFilmByGenre(
         @Header("KEY") token: String,
         @Query("api_key") key: String,
-        @Query("with_genres") genre:String,
+        @Query("with_genres") genre: String,
     ): Call<FilmByGenreDTO>
+
+    @GET("3/movie/{movie_id}/reviews")
+    fun getFilmReview(
+        @Header("KEY") token: String,
+        @Path("movie_id") id: Int?,
+        @Query("api_key") key: String
+    ):Call<ReviewsDTO>
 }

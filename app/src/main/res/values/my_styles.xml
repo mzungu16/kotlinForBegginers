@@ -25,7 +25,7 @@
     </style>
 
     <style name="Widget.Shrine.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:theme">@style/Theme.Shrine</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="titleTextAppearance">@style/TextAppearance.Shrine.Toolbar</item>

@@ -4,19 +4,14 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.FilmByGenreCardDTO
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 import com.gleb.kotlinforbegginers.model.GenreCardDTO
 import com.gleb.kotlinforbegginers.viewmodel.*
-import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainFragment : Fragment() {
 
@@ -40,17 +35,6 @@ class MainFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.main_fragment, container, false)
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
-        view.app_bar.setNavigationOnClickListener(
-            NavigationIconClickListener(
-                requireActivity(),
-                view.product_grid,
-                AccelerateDecelerateInterpolator(),
-                ContextCompat.getDrawable(requireContext(), R.drawable.shr_menu),
-                ContextCompat.getDrawable(requireContext(), R.drawable.shr_close_menu)
-            )
-        )
-        view.product_grid.background =
-            context?.getDrawable(R.drawable.shr_product_grid_background_shape)
         return view
     }
 
@@ -123,10 +107,18 @@ class MainFragment : Fragment() {
             adapter = filmAdapter
         }
         filmAdapter.listener = object : FilmAdapter.OnItemClick {
-            override fun onClick(filmCard: FilmCardDTO?) {
+            override fun onImageClick(filmCard: FilmCardDTO?) {
                 BottomSheet(filmCard).also { btnDescription ->
                     btnDescription.show(requireActivity().supportFragmentManager, "BottomSheet")
                 }
+            }
+
+            override fun onReviewBtnClick(filmCard: FilmCardDTO?) {
+                /* ReviewBottomSheet(filmCard).also { review_btn ->
+                     review_btn.show(requireActivity().supportFragmentManager, "ReviewBottomSheer")
+                 }*/
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(R.id.container, ReviewBottomSheet(filmCard)).addToBackStack(null).commit()
             }
         }
     }

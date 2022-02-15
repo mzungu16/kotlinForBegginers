@@ -1,9 +1,7 @@
 package com.gleb.kotlinforbegginers.viewmodel
 
 import androidx.lifecycle.*
-import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.*
-import com.gleb.kotlinforbegginers.view.App
 
 class FilmViewModel : ViewModel() {
     private val liveDataToObserve: MutableLiveData<List<FilmCardDTO?>> = MutableLiveData()

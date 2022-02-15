@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.228" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/for_average_button2.xml" value="0.2359375" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/for_check_button.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/for_textview.xml" value="0.3974358974358974" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/ic_launcher_background.xml" value="0.228" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/ic_no_photo_vector.xml" value="0.21" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_close_menu.xml" value="0.4482421875" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_filter.xml" value="0.228" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_filtre.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_menu.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_product_grid_background_shape.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/drawable/shr_search.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/activity_main.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.3875" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/film_item.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/main_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/recycle_veiw_item.xml" value="0.3875" />
@@ -20,6 +25,8 @@
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/recycler_view_item.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/recycler_view_item_film_by_genre.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/recycler_view_item_genres.xml" value="0.3875" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/review_item.xml" value="0.3875" />
+        <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/review_layout.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/layout/shr_backdrop.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/menu/shr_backdrop.xml" value="0.3875" />
         <entry key="..\:/Users/Gleb/AndroidStudioProjects/kotlinForBegginers/app/src/main/res/menu/shr_toolbar_menu.xml" value="0.3875" />

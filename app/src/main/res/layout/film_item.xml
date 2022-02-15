@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:cardBackgroundColor="@color/colorAccent"
-    app:cardCornerRadius="10dp">
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/front_image_id"
             android:layout_width="wrap_content"
@@ -22,12 +23,11 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <Button
-            android:layout_gravity="center"
-            android:id="@+id/check_film_button_id"
+            android:id="@+id/review_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/review"
-            />
+            android:layout_gravity="center"
+            android:text="@string/review" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

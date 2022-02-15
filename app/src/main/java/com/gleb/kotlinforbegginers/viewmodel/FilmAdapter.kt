@@ -1,6 +1,5 @@
 package com.gleb.kotlinforbegginers.viewmodel
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.gleb.kotlinforbegginers.viewmodel.DiffCallBackForFilm
 import com.gleb.kotlinforbegginers.R
 import com.gleb.kotlinforbegginers.model.FilmCardDTO
 
@@ -28,7 +26,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false)
         )
     }
 
@@ -45,14 +43,18 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.MyViewHolder>() {
                 findViewById<ImageView>(R.id.front_image_id).apply {
                     load("https://image.tmdb.org/t/p/original/${card?.poster_path}")
                     setOnClickListener(View.OnClickListener {
-                        listener?.onClick(card)
+                        listener?.onImageClick(card)
                     })
+                }
+                findViewById<Button>(R.id.review_btn).setOnClickListener {
+                    listener?.onReviewBtnClick(card)
                 }
             }
         }
     }
 
     interface OnItemClick {
-        fun onClick(filmCard: FilmCardDTO?)
+        fun onImageClick(filmCard: FilmCardDTO?)
+        fun onReviewBtnClick(filmCard: FilmCardDTO?)
     }
 }

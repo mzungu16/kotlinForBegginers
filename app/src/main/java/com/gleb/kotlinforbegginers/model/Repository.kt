@@ -20,7 +20,6 @@ interface Repository {
     fun getFilmByGenreFromServer(): LiveData<List<FilmByGenreCardDTO?>>
     fun getFilmByGenreInternetAccess(genreId: Int?)
 
-    //database section
-    fun getAllFilmsFromDB(dao: FilmDao): List<FilmCardDTO?>
-    fun insertAllFilmsInDB(dao: FilmDao, filmCards: List<FilmCardDTO?>)
+    fun getFilmReviewFromServer(): LiveData<List<ReviewCardDTO?>>
+    fun getFilmReviewInternetAccess(filmId: Int?)
 }

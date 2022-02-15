@@ -3,13 +3,9 @@ package com.gleb.kotlinforbegginers.viewmodel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CompoundButton
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gleb.kotlinforbegginers.R
-import com.gleb.kotlinforbegginers.model.FilmCardDTO
 import com.gleb.kotlinforbegginers.model.GenreCardDTO
 import com.google.android.material.chip.Chip
 
@@ -28,7 +24,7 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         return GenreViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_view_item_genres, parent, false)
+                .inflate(R.layout.genre_item, parent, false)
         )
     }
 
