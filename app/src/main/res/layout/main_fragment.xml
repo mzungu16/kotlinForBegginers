@@ -8,17 +8,6 @@
     android:focusable="true"
     tools:context=".view.MainFragment">
 
-    <LinearLayout
-        style="@style/Widget.Shrine.Backdrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="88dp">
-
-        <include layout="@layout/shr_backdrop" />
-    </LinearLayout>
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,7 +22,6 @@
             android:paddingEnd="12dp"
             android:paddingRight="12dp"
             app:contentInsetStart="0dp"
-            app:navigationIcon="@drawable/shr_menu"
             app:title="Kotlin" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,26 +36,19 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Genres"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_genre"
+            android:id="@+id/genre_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_view_item_genres" />
+            tools:listitem="@layout/genre_item" />
 
         <LinearLayout
-            android:id="@+id/linear"
+            android:id="@+id/layout_with_filmByGenres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -90,46 +71,37 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/hideBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_film_by_genre"
+                android:id="@+id/film_by_genre_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                tools:listitem="@layout/recycler_view_item_film_by_genre" />
+                tools:listitem="@layout/film_by_genre_item" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear2"
+            android:id="@+id/layout_with_popularFilms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
+            <TextView
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Popular"
                 android:textColor="@color/black"
-                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/film_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/recycler_view_item" />
+                tools:listitem="@layout/film_item" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

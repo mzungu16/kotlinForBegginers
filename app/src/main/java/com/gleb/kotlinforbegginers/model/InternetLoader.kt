@@ -17,8 +17,8 @@ object InternetLoader {
     private const val KEY = "43f0fb07d8e8120f4d5ef58a4ba90cb7"
 
     private val client: OkHttpClient = OkHttpClient.Builder()
-        .callTimeout(1000, TimeUnit.MILLISECONDS)
-        .connectTimeout(1000, TimeUnit.MILLISECONDS)
+        .callTimeout(2000, TimeUnit.MILLISECONDS)
+        .connectTimeout(4000, TimeUnit.MILLISECONDS)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
@@ -94,6 +94,20 @@ object InternetLoader {
                     Log.d(TAG, t.stackTraceToString())
                 }
             })
+    }
+
+    fun loadFilmReviews(filmId: Int?, onCompleteListener: Listener<List<ReviewCardDTO?>>) {
+        retrofitObject.getFilmReview(KEY, filmId, KEY).enqueue(object : Callback<ReviewsDTO?> {
+            override fun onResponse(call: Call<ReviewsDTO?>, response: Response<ReviewsDTO?>) {
+                response.body()?.let {
+                    onCompleteListener.on(it.results)
+                }
+            }
+
+            override fun onFailure(call: Call<ReviewsDTO?>, t: Throwable) {
+                Log.d(TAG, t.stackTraceToString())
+            }
+        })
     }
 
     interface Listener<T> {

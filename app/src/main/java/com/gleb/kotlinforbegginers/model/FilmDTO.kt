@@ -10,5 +10,4 @@ data class FilmCardDTO(
     val overview: String?,
     val poster_path: String?,
     val vote_average: Double?,
-//    "release_date" : "2021-12-17",
 )

@@ -1,10 +1,8 @@
 package com.gleb.kotlinforbegginers.viewmodel
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +24,7 @@ class FilmByGenreAdapter : RecyclerView.Adapter<FilmByGenreAdapter.FilmByGenreVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmByGenreViewHolder {
         return FilmByGenreViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_view_item_film_by_genre, parent, false)
+                .inflate(R.layout.film_by_genre_item, parent, false)
         )
     }
 
